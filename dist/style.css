@@ -1,0 +1,227 @@
+.hidden {
+  display: none;
+  visibility: hidden;
+    width: 1px;
+    height: 1px;
+  position: absolute;
+  z-index: -5;
+}
+
+body {
+    background: #0c1d26;
+}
+
+#app {
+    position: relative;
+    margin: auto;
+    margin-top: 10px;
+    background: #387494;
+    background: url('https://tools.unfamiliarplace.com/mathboggle/assets/images/wood-tabletop.jpg');
+    background-size: 220%;
+    background-repeat: no-repeat;
+    color: #fff;
+    width: 800px;
+    height: 610px;
+    display: block;
+    border-radius: 30px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    content-align: center;
+    text-align: center;
+}
+
+#btnAlarm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 500px;
+  z-index: 99;
+  position: absolute;
+}
+
+#btnAlarmText {
+  display: block;
+}
+
+#settingsPanel {
+    background: url('https://tools.unfamiliarplace.com/mathboggle/assets/images/rumpled-paper.jpg');
+  color: #111;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  border-radius: 30px 30px 0px 0px;
+}
+
+#timesPanel {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#buttonsPanel { 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#buttonsPanel button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
+#playPanel {
+  height: 240px;
+  padding: 40px 0 0 0;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#reportPanel {
+  height: 80px;
+  color: #111;
+  border-radius: 0px 0px 30px 30px;
+  padding: 20px;
+  background: url('https://tools.unfamiliarplace.com/mathboggle/assets/images/blueprint.jpg');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+}
+
+#reportsWrapper {  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.reportWindow {
+  display: flex;  
+  flex-direction: column;
+  justify-content: center;  
+  width: 200px;
+}
+
+.reportWindow label {
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.reportDisplay {
+  font-size: 20px;
+}
+
+#timesPanel, #buttonsPanel {
+  padding: 10px;
+}
+
+#timerPanel {
+  width: 100%;
+  height: 100%;
+  font-family: 'Courier New', serif;
+}
+
+#counterPanel {  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#timerPanel.overtime-1 {
+  color: #5bd4a8;
+}
+
+#timerPanel.overtime-2 {
+  color: #5bd4a8;
+}
+
+#timerPanel.overtime-3 {
+  color: #e1e381;
+}
+
+#timerPanel.overtime-4 {
+  color: #ff0024;
+}
+
+#negativeSign {
+  width: 0;
+  height: 0;
+  margin-left: -5%;
+  display: none;
+}
+
+#timerPanel.negative #negativeSign {
+  display: block;
+}
+
+#timerPanel.overlay {
+  z-index: 99;
+  margin-top: -20%;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 50px;
+  text-align: center;
+  font-size: 20px !important;
+}
+
+.timeInput label {
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.timeInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+button:enabled:hover {
+    background: #1d4154;
+    color: white;
+}
+
+button:disabled {
+  background: #ccc;
+}
+
+button {
+  width: 80px;
+  height: 80px;
+  font-size: 30px;
+  background: #fff;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+#btnClear {
+  font-size: 25px;
+}
+
+#hourglassPanel {
+  height: 150px;
+}
+
+#hourglass {
+  transition: all 0.5s ease-in-out 0s;
+  transform: rotate(0deg);
+  font-size: 50px;
+  margin: auto;
+  margin-bottom: 40px;
+  width: 50px;
+}
+
+.counter, .colon, #negativeSign {
+  font-size: 80px;
+}
+
+#playPanel {
+  width: 80%;
+  margin: auto;
+}
