@@ -22,64 +22,62 @@
 </head>
 <body>
 <div id='app'>
-
-  <div id='alarm'><button id='btnAlarm' class='hidden' title="Time's up! Click to stop alarm (hotkey space)"><div id='btnAlarmText'><i class="fas fa-bell"></i></div></button></div>
-
-  <div id='settingsPanel'>
-    <div id='timesPanel'>
-      <div class='timeInput'>
-        <input id='nHours' class='spinner tooltip' title='Hours' />
-        <label for='nHours'>Hours</label>
+  <div id="timerScene">
+    <div id='settingsPanel'>
+      <div id='timesPanel'>
+        <div class='timeInput'>
+          <input id='nHours' class='spinner tooltip' title='Hours' />
+          <label for='nHours'>Hours</label>
+        </div>
+        <div class='timeInput'>
+          <input id='nMinutes' class='spinner tooltip' title='Minutes' />
+          <label for='nMinutes'>Minutes</label>
+        </div>
+        <div class='timeInput'>
+          <input id='nSeconds' class='spinner tooltip' title='Seconds' />
+          <label for='nSeconds'>Seconds</label>
+        </div>
       </div>
-      <div class='timeInput'>
-        <input id='nMinutes' class='spinner tooltip' title='Minutes' />
-        <label for='nMinutes'>Minutes</label>
-      </div>
-      <div class='timeInput'>
-        <input id='nSeconds' class='spinner tooltip' title='Seconds' />
-        <label for='nSeconds'>Seconds</label>
-      </div>
-    </div>
-    <div id='buttonsPanel'>
-      <button id='btnStart' title='Start timer (hotkey space)'>
-        <i class="fas fa-play"></i>
-      </button>
-      <button id='btnReset' title='Reset timer (hotkey R)' disabled='disabled'>
-        <i class="fas fa-trash"></i>
-      </button>
-    </div>
-  </div>
-  <div id='playPanel'>
-    <div id='hourglassPanel'>
-      <div id='hourglass'>
-        <i class="fas fa-hourglass"></i>
+      <div id='buttonsPanel'>
+        <button id='btnStart' title='Start timer (hotkey space)'>
+          <i class="fas fa-play"></i>
+        </button>
+        <button id='btnReset' title='Reset timer (hotkey R)' disabled='disabled'>
+          <i class="fas fa-trash"></i>
+        </button>
       </div>
     </div>
-    <div id='timerPanel'>
-      <div id='counterPanel'>
-        <div id='negativeSign' class="hidden">-</div>
-      <div id='hoursDisplay' class='counter'>
-        00
+    <div id='playPanel'>
+      <div id='hourglassPanel'>
+        <div id='hourglass'>
+          <i class="fas fa-hourglass"></i>
+        </div>
       </div>
-      <div class='colon'>:</div>
-      <div id='minutesDisplay' class='counter'>
-        00
+      <div id='timerPanel'>
+        <div id='counterPanel'>
+          <div id='negativeSign' class="hidden">-</div>
+          <div id='hoursDisplay' class='counter'>
+            00
+          </div>
+          <div class='colon'>:</div>
+          <div id='minutesDisplay' class='counter'>
+            00
+          </div>
+          <div class='colon'>:</div>
+          <div id='secondsDisplay' class='counter'>
+            00
+          </div>
+        </div>
       </div>
-      <div class='colon'>:</div>
-      <div id='secondsDisplay' class='counter'>
-        00
-      </div>
-      </div>
+
     </div>
+    <div id='reportPanel'>
+      <div id='reportsWrapper'>
 
-  </div>
-  <div id='reportPanel'>
-    <div id='reportsWrapper'>
-
-      <div class='reportWindow'>
-        <div id='startedDisplay' class='reportDisplay'></div>
-        <label for='startedDisplay'>Start</label>
-      </div>
+        <div class='reportWindow'>
+          <div id='startedDisplay' class='reportDisplay'></div>
+          <label for='startedDisplay'>Start</label>
+        </div>
 
         <div class='reportWindow'>
           <div id='pausedDisplay' class='reportDisplay'></div>
@@ -93,6 +91,10 @@
 
       </div>
     </div>
+  </div>
+  <div id="alarmScene">
+    <div id='alarm'><button id='btnAlarm' title="Time's up! Click to stop alarm (hotkey space)"><div id='btnAlarmText'><i class="fas fa-bell"></i></div></button></div>
+  </div>
   </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 class App {
+  stage;
   jukebox;
   timer;
   hourglass;
@@ -16,6 +17,10 @@ class App {
     this.gatherElements();
     this.bindElements();
 
+    this.stage = new _Stage();
+    this.addScenes();
+    this.stage.show('timer');
+
     this.jukebox = new Jukebox();
     this.preloadJukebox();
 
@@ -32,6 +37,12 @@ class App {
     this.overtime = false;
     this.ringInterval = null;
   }
+
+  addScenes = () => {
+    this.stage.addScene(new _Scene("timer", "#timerScene"));
+    this.stage.addScene(new _Scene("alarm", "#alarmScene"));
+    this.stage.setDefault("timer");
+  };
   
   preloadJukebox() {
     this.jukebox.addByURL('cathedral', 'https://tools.unfamiliarplace.com/common/assets/sounds/cathedral.mp3');
@@ -75,7 +86,6 @@ class App {
         return;
       }
       this.stopRinging();
-      this.endHourglass();
     });
 
     $(document).keyup((e) => {
@@ -95,18 +105,30 @@ class App {
       }
     });
   }
+
+  timerEnd() {
+    this.startRinging();
+    this.stage.show('alarm');
+    this.disableAlarmButton(false);
+
+    this.disableStart(true);
+    this.overtime = true;
+  }
+
   reset() {
-    
     this.stopRinging();
+    this.disableAlarmButton(true);
+
     this.endHourglass();
-    
-    this.jukebox.play("kick");
     this.timer.reset();
+
     this.drawTimer();
+
     this.disableReset(true);
-    app.disableStart(false);
-    $("#timerPanel").removeClass("overlay");
+    this.disableStart(false);
     this.overtime = false;
+
+    this.jukebox.play("kick");
     this.updateWindowTitle();
   }
 
@@ -125,10 +147,10 @@ class App {
     if (this.ringing) {
       this.ringing = false;
       clearInterval(this.ringInterval);
-      this.timer.stopInterval();
       this.jukebox.stop("cathedral");
-      this.drawTimer();
-      this.disableAlarmButton(true);
+      this.stage.show('timer');
+      this.timer.reset();
+
       $("#timerPanel").removeClass("overlay");
     }
   }
@@ -137,10 +159,12 @@ class App {
     if (!this.timer.started) {
       this.jukebox.play("pipe");
       this.timer.start();
+
     } else {
       if (this.timer.paused) {
         this.jukebox.play("pipe");
         this.timer.unpause();
+
       } else {
         this.jukebox.play("pause");
         this.timer.pause();
@@ -279,12 +303,6 @@ class App {
 
   disableAlarmButton(flag) {
     this.btnAlarm.prop("disabled", flag);
-
-    if (flag) {
-      this.btnAlarm.addClass("hidden");
-    } else {
-      this.btnAlarm.removeClass("hidden");
-    }
   }
 
   rotateHourglass(degrees) {
@@ -309,13 +327,6 @@ class App {
   endHourglass() {
     this.hourglass.html(FontAwesome.fa("hourglass-end"));
     this.rotateHourglass(360);
-  }
-
-  timerEnd() {
-    this.startRinging();
-    this.disableAlarmButton(false);
-    this.disableStart(true);
-    this.overtime = true;
   }
 }
 
