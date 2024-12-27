@@ -16,14 +16,15 @@ class App {
     this.gatherElements();
     this.bindElements();
 
+    this.timer = new Timer();
+
     this.jukebox = new Jukebox();
     this.preloadJukebox();
 
     this.options = new Options();
-    this.timer = new Timer();
-
     this.options.initialize();
     this.timer.initialize();
+
     this.drawTimer();
     this.disableReset(true);
 
