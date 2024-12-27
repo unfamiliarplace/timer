@@ -4,7 +4,6 @@ class App {
   hourglass;
   btnStart;
   btnReset;
-  btnClear;
   btnAlarm;
   hoursDisplay;
   minutesDisplay;
@@ -18,10 +17,11 @@ class App {
     this.bindElements();
 
     this.jukebox = new Jukebox();
+    this.preloadJukebox();
+
     this.options = new Options();
     this.timer = new Timer();
 
-    this.addSounds();
     this.options.initialize();
     this.timer.initialize();
     this.drawTimer();
@@ -31,12 +31,18 @@ class App {
     this.overtime = false;
     this.ringInterval = null;
   }
+  
+  preloadJukebox() {
+    this.jukebox.add_by_url('cathedral', 'https://tools.unfamiliarplace.com/common/assets/sounds/cathedral.mp3');
+    this.jukebox.add_by_url('pipe', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pipe.mp3');
+    this.jukebox.add_by_url('pause', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pause.mp3');
+    this.jukebox.add_by_url('kick', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_kick.mp3');
+  }
 
   gatherElements() {
     this.hourglass = $("#hourglass");
     this.btnStart = $("#btnStart");
     this.btnReset = $("#btnReset");
-    // this.btnClear = $("#btnClear");
     this.btnAlarm = $("#btnAlarm");
 
     this.hoursDisplay = $("#hoursDisplay");
@@ -63,10 +69,6 @@ class App {
       this.reset();
     });
 
-    //this.btnClear.click((e) => {
-    //  this.clear();
-    //});
-
     this.btnAlarm.click((e) => {
       if (! this.ringing) {
         return;
@@ -76,7 +78,7 @@ class App {
     });
 
     $(document).keyup((e) => {
-      if (e.keyCode == 32) {
+      if (e.keyCode === 32) {
         
         if (this.ringing) {
           this.btnAlarm.click();
@@ -84,7 +86,7 @@ class App {
           this.btnStart.click();  
         }        
         
-      } else if (e.keyCode == 82) { // r
+      } else if (e.keyCode === 82) { // r
         if (this.ringing) {
           this.btnAlarm.click();          
         }
@@ -92,18 +94,6 @@ class App {
       }
     });
   }
-
-  clear() {
-    this.jukebox.play("shake");
-    this.options.resetValues();
-    this.timer.reset();
-    this.drawTimer();
-    this.disableReset(true);
-    this.disableClear(true);
-    this.disableStart(true);
-    this.overtime = false;
-  }
-
   reset() {
     
     this.stopRinging();
@@ -160,24 +150,6 @@ class App {
     this.drawTimer();
     this.disableReset(false);
     app.disableClear(false);
-  }
-
-  addSounds() {
-    this.jukebox.add("cathedral", "#soundCathedral");
-    this.jukebox.add("bell", "#soundBell");
-    this.jukebox.add("shake", "#soundShake");
-    this.jukebox.add("coin", "#soundCoin");
-    this.jukebox.add("speedup", "#soundSpeedup");
-    this.jukebox.add("pipe", "#soundPipe");
-    this.jukebox.add("jump", "#soundJump");
-    this.jukebox.add("leap", "#soundLeap");
-    this.jukebox.add("stomp", "#soundStomp");
-    this.jukebox.add("pause", "#soundPause");
-    this.jukebox.add("die", "#soundDie");
-    this.jukebox.add("kick", "#soundKick");
-    this.jukebox.add("powerup", "#soundPowerup");
-    this.jukebox.add("5seconds", "#sound5Seconds");
-    this.jukebox.add("worldclear", "#soundWorldClearExcerpt");
   }
 
   drawCounters() {
@@ -303,10 +275,6 @@ class App {
     this.btnReset.prop("disabled", flag);
   }
 
-  disableClear(flag) {
-    //this.btnClear.prop("disabled", flag);
-  }
-
   disableAlarmButton(flag) {
     this.btnAlarm.prop("disabled", flag);
 
@@ -341,14 +309,6 @@ class App {
     this.rotateHourglass(360);
   }
 
-  timerHalfway() {
-    this.jukebox.play("worldclear");
-  }
-
-  timerLastStretch() {
-    this.jukebox.play("powerup");
-  }
-
   timerEnd() {
     this.startRinging();
     this.disableAlarmButton(false);
@@ -378,9 +338,7 @@ class Options {
 
   setElements() {
     this.nHours.value(0);
-
     this.nMinutes.value(25);
-
     this.nSeconds.value(0);
 
     for (let changer of this.changers) {
@@ -404,12 +362,6 @@ class Options {
       0 === this.nHours.value() + this.nMinutes.value() + this.nSeconds.value();
     app.disableStart(flag);
     app.disableClear(flag);
-  }
-
-  resetValues() {
-    this.nHours.value(0);
-    this.nMinutes.value(0);
-    this.nSeconds.value(0);
   }
 }
 
@@ -498,26 +450,14 @@ class Timer {
     return timeLeft.hours * 3600 + timeLeft.minutes * 60 + timeLeft.seconds;
   }
 
-  elapsed() {
-    return this.secondsLimit() - this.secondsLeft();
-  }
-
   click() {
     let secondsLeft = Math.round(this.secondsLeft());
 
     if (Math.round(secondsLeft) === 0) {
       this.end();
 
-      // unreliable and undesired
-    } // else {
-    //  if (secondsLeft === Math.round(this.secondsLimit() / 2)) {
-    //    app.timerHalfway();
-    //  } else if (secondsLeft === 30) {
-    //    app.timerLastStretch();
-    //  }
-    //}
-
-    app.drawTimer();
+      app.drawTimer();
+    }
   }
 
   start() {
@@ -540,7 +480,6 @@ class Timer {
   }
 
   end() {
-    //this.stopInterval();
     this.ended = true;
     app.timerEnd();
   }

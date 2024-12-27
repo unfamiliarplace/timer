@@ -13,10 +13,9 @@ body {
 
 #app {
     position: relative;
-    margin: auto;
-    margin-top: 10px;
-    background: #387494;
-    background: url('https://tools.unfamiliarplace.com/mathboggle/assets/images/wood-tabletop.jpg');
+  margin: 10px auto auto;
+  background: #387494;
+    background: url('https://tools.unfamiliarplace.com/common/assets/images/wood-tabletop.jpg');
     background-size: 220%;
     background-repeat: no-repeat;
     color: #fff;
@@ -25,7 +24,6 @@ body {
     display: block;
     border-radius: 30px;
     font-family: 'Helvetica', 'Arial', sans-serif;
-    content-align: center;
     text-align: center;
 }
 
@@ -45,7 +43,7 @@ body {
 }
 
 #settingsPanel {
-    background: url('https://tools.unfamiliarplace.com/mathboggle/assets/images/rumpled-paper.jpg');
+    background: url('https://tools.unfamiliarplace.com/common/assets/images/rumpled-paper.jpg');
   color: #111;
   height: 130px;
   display: flex;
@@ -89,7 +87,7 @@ body {
   color: #111;
   border-radius: 0px 0px 30px 30px;
   padding: 20px;
-  background: url('https://tools.unfamiliarplace.com/mathboggle/assets/images/blueprint.jpg');
+  background: url('https://tools.unfamiliarplace.com/common/assets/images/blueprint.jpg');
   display: flex;
   flex-direction: column;
   justify-content: center;  

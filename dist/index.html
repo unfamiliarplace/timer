@@ -4,33 +4,27 @@
   <meta charset="UTF-8">
   <title>Timer</title>
   <link rel='stylesheet' href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'><link rel="stylesheet" href="./style.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'><link rel="stylesheet" href="./style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel='stylesheet' href='https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css'>
+  <link rel="stylesheet" href="./style.css">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://tools.unfamiliarplace.com/common/includes/misc/app-tools.js"></script>
+  <script type="text/javascript" src="https://tools.unfamiliarplace.com/common/includes/misc/jquery-ui-options.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.5.0/luxon.min.js"></script>
+  <script  src="./script.js"></script>
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
 <div id='app'>
-  <img class='hidden' src='https://tools.unfamiliarplace.com/cards/assets/images/wood-tabletop.jpg' />
-  <img class='hidden' src='https://tools.unfamiliarplace.com/cards/assets/images/rumpled-paper.jpg' />
-  <img class='hidden' src='https://tools.unfamiliarplace.com/mathboggle/assets/images/blueprint.jpg' />
 
-    <audio id='soundCathedral' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/cathedral.mp3' preload='true'></audio>
-  <audio id='soundShake' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/shake.mp3' preload='true'></audio>
-  <audio id='soundCoin' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_coin.mp3' preload='true'></audio>
-  <audio id='soundBell' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/bell.mp3' preload='true'></audio>
-  <audio id='soundSpeedup' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_warning.mp3' preload='true'></audio>
-  <audio id='soundPipe' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_pipe.mp3' preload='true'></audio>
-  <audio id='soundJump' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_jump-small.mp3' preload='true'></audio>
-  <audio id='soundLeap' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_jump-super.mp3' preload='true'></audio>
-  <audio id='soundStomp' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_stomp.mp3' preload='true'></audio>
-  <audio id='soundPause' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_pause.mp3' preload='true'></audio>
-  <audio id='soundDie' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_mariodie.mp3' preload='true'></audio>
-  <audio id='soundKick' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_kick.mp3' preload='true'></audio>
-  <audio id='soundPowerup' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_powerup.mp3' preload='true'></audio>
-  <audio id='sound5Seconds' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/5seconds.mp3' preload='true'></audio>
-  <audio id='soundWorldClearExcerpt' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/smb_world_clear_excerpt.mp3' preload='true'></audio>
-  <audio id='soundChairSlide' src='https://tools.unfamiliarplace.com/mathboggle/assets/sounds/chairslide.mp3' preload='true'></audio>
-  
   <div id='alarm'><button id='btnAlarm' class='hidden' title="Time's up! Click to stop alarm (hotkey space)"><div id='btnAlarmText'><i class="fas fa-bell"></i></div></button></div>
 
   <div id='settingsPanel'>
@@ -55,11 +49,6 @@
       <button id='btnReset' title='Reset timer (hotkey R)' disabled='disabled'>
         <div class="buttonEmoji"><i class="fas fa-trash"></i></div>
       </button>
-      <!--
-      <button id='btnClear'>
-        <div class="buttonEmoji"><i class="fas fa-power-off"></div>
-      </button>
-      -->
     </div>
   </div>
   <div id='playPanel'>
@@ -88,31 +77,24 @@
   </div>
   <div id='reportPanel'>
     <div id='reportsWrapper'>
-      
+
       <div class='reportWindow'>
         <div id='startedDisplay' class='reportDisplay'></div>
         <label for='startedDisplay'>Start</label>
       </div>
-      
+
         <div class='reportWindow'>
           <div id='pausedDisplay' class='reportDisplay'></div>
           <label for='pausedDisplay'>Time paused</label>
         </div>
-      
+
         <div class='reportWindow'>
           <div id='finishesDisplay' class='reportDisplay'></div>
           <label for='finishesDisplay'>Finish</label>
         </div>
-      
+
       </div>
     </div>
   </div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
-<script src='https://tools.unfamiliarplace.com/timer/includes/app-tools.js'></script>
-<script src='https://tools.unfamiliarplace.com/timer/includes/jquery-ui-options.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/luxon/1.26.0/luxon.min.js'></script><script  src="./script.js"></script>
-
 </body>
 </html>
