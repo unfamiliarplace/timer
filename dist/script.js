@@ -57,9 +57,9 @@ class App {
     this.btnReset = $("#btnReset");
     this.btnAlarm = $("#btnAlarm");
 
-    this.hoursDisplay = $("#hoursDisplay");
-    this.minutesDisplay = $("#minutesDisplay");
-    this.secondsDisplay = $("#secondsDisplay");
+    this.hoursDisplay = $(".hoursDisplay");
+    this.minutesDisplay = $(".minutesDisplay");
+    this.secondsDisplay = $(".secondsDisplay");
 
     this.startedDisplay = $("#startedDisplay");
     this.pausedDisplay = $("#pausedDisplay");
@@ -136,7 +136,7 @@ class App {
     if (!this.ringing) {
       this.ringing = true;
       this.jukebox.play("cathedral");
-      $("#timerPanel").addClass("overlay");
+      // $(".timerPanel").addClass("overlay");
       this.ringInterval = setInterval(() => {
         this.jukebox.play("cathedral");
       }, 28 * 1000);
@@ -151,7 +151,7 @@ class App {
       this.stage.show('timer');
       this.timer.reset();
 
-      $("#timerPanel").removeClass("overlay");
+      // $("#timerPanel").removeClass("overlay");
     }
   }
 
@@ -181,21 +181,21 @@ class App {
     this.minutesDisplay.html(prettyValues.minutes);
     this.secondsDisplay.html(prettyValues.seconds);
 
-    let tp = $("#timerPanel");
-    let ns = $('#negativeSign');
+    let tp = $(".timerPanel");
+    let ns = $('.negativeSign');
 
     tp.removeClass("overtime-1");
     tp.removeClass("overtime-2");
     tp.removeClass("overtime-3");
     tp.removeClass("overtime-4");
-    ns.addClass("hidden");
+    ns.addClass("hide");
 
     if (prettyValues.overtimeLevel > 0) {
       tp.addClass(`overtime-${prettyValues.overtimeLevel}`);
     }
 
     if (prettyValues.overtimeLevel > 1) {
-      ns.removeClass("hidden");
+      ns.removeClass("hide");
     }
   }
 

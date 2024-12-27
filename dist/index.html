@@ -53,18 +53,18 @@
           <i class="fas fa-hourglass"></i>
         </div>
       </div>
-      <div id='timerPanel'>
-        <div id='counterPanel'>
-          <div id='negativeSign' class="hidden">-</div>
-          <div id='hoursDisplay' class='counter'>
+      <div class='timerPanel'>
+        <div class='counterPanel'>
+          <div class='negativeSign hidden'>-</div>
+          <div class='hoursDisplay counter'>
             00
           </div>
           <div class='colon'>:</div>
-          <div id='minutesDisplay' class='counter'>
+          <div class='minutesDisplay counter'>
             00
           </div>
           <div class='colon'>:</div>
-          <div id='secondsDisplay' class='counter'>
+          <div class='secondsDisplay counter'>
             00
           </div>
         </div>
@@ -93,7 +93,26 @@
     </div>
   </div>
   <div id="alarmScene">
+    <div id="alarmPanel">
+
+      <div class='timerPanel'>
+        <div class='counterPanel'>
+          <div class='negativeSign hide'>-</div>
+          <div class='hoursDisplay counter'>
+            00
+          </div>
+          <div class='colon'>:</div>
+          <div class='minutesDisplay counter'>
+            00
+          </div>
+          <div class='colon'>:</div>
+          <div class='secondsDisplay counter'>
+            00
+          </div>
+        </div>
+      </div>
     <div id='alarm'><button id='btnAlarm' title="Time's up! Click to stop alarm (hotkey space)"><div id='btnAlarmText'><i class="fas fa-bell"></i></div></button></div>
+  </div>
   </div>
   </div>
 </body>

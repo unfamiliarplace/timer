@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    font-size: 40em;
+    font-size: 33em;
     /*z-index: 99;*/
     /*position: absolute;*/
     box-sizing: border-box;
@@ -109,7 +109,7 @@ body {
     padding: 10px;
 }
 
-#timerPanel {
+.timerPanel {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -119,39 +119,33 @@ body {
     font-family: 'Courier New', serif;
 }
 
-#counterPanel {
+.counterPanel {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     gap: 60px;
 }
 
-#negativeSign {
+.negativeSign {
     width: 0;
     height: 0;
     margin-left: -60px;
 }
 
-#timerPanel.overtime-1 {
+.timerPanel.overtime-1 {
     color: #5bd4a8;
 }
 
-#timerPanel.overtime-2 {
+.timerPanel.overtime-2 {
     color: #5bd4a8;
 }
 
-#timerPanel.overtime-3 {
+.timerPanel.overtime-3 {
     color: #e1e381;
 }
 
-#timerPanel.overtime-4 {
+.timerPanel.overtime-4 {
     color: #ff0024;
-}
-
-#timerPanel.overlay {
-    z-index: 99;
-    margin-top: -20%;
-    pointer-events: none;
 }
 
 .spinner {
@@ -178,6 +172,7 @@ button:enabled:hover {
 
 button:disabled {
     background: #ccc;
+    cursor: default;
 }
 
 button {
@@ -186,6 +181,12 @@ button {
     font-size: 30px;
     background: #fff;
     font-family: 'Helvetica', 'Arial', sans-serif;
+    cursor: pointer;
+    border: 1px solid #111;
+}
+
+.fas {
+    pointer-events: none;
 }
 
 #btnClear {
@@ -205,33 +206,19 @@ button {
     width: 50px;
 }
 
-.counter, .colon, #negativeSign {
+.counter, .colon, .negativeSign {
     font-size: 80px;
 }
 
-.hidden {
-    display: none;
-    visibility: hidden;
-    width: 1px;
-    height: 1px;
+#alarmPanel .timerPanel {
+    pointer-events: none;
     position: absolute;
-    /*z-index: -5;*/
+    top: 250px;
+    left: 0;
+    z-index: 99;
 }
 
-/* me again */
 .hide {
     visibility: hidden;
     display: none;
-}
-
-button {
-    cursor: pointer;
-}
-
-button:disabled {
-    cursor: default;
-}
-
-.fas {
-    pointer-events: none;
 }
