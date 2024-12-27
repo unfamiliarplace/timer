@@ -16,14 +16,14 @@ class App {
     this.gatherElements();
     this.bindElements();
 
-    this.timer = new Timer();
-
     this.jukebox = new Jukebox();
     this.preloadJukebox();
 
     this.options = new Options();
+    this.timer = new Timer();
+
     this.options.initialize();
-    this.timer.initialize();
+    this.timer.reset();
 
     this.drawTimer();
     this.disableReset(true);
@@ -34,10 +34,10 @@ class App {
   }
   
   preloadJukebox() {
-    this.jukebox.add_by_url('cathedral', 'https://tools.unfamiliarplace.com/common/assets/sounds/cathedral.mp3');
-    this.jukebox.add_by_url('pipe', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pipe.mp3');
-    this.jukebox.add_by_url('pause', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pause.mp3');
-    this.jukebox.add_by_url('kick', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_kick.mp3');
+    this.jukebox.addByURL('cathedral', 'https://tools.unfamiliarplace.com/common/assets/sounds/cathedral.mp3');
+    this.jukebox.addByURL('pipe', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pipe.mp3');
+    this.jukebox.addByURL('pause', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pause.mp3');
+    this.jukebox.addByURL('kick', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_kick.mp3');
   }
 
   gatherElements() {
@@ -105,7 +105,6 @@ class App {
     this.drawTimer();
     this.disableReset(true);
     app.disableStart(false);
-    app.disableClear(false);
     $("#timerPanel").removeClass("overlay");
     this.overtime = false;
     this.updateWindowTitle();
@@ -150,7 +149,6 @@ class App {
 
     this.drawTimer();
     this.disableReset(false);
-    app.disableClear(false);
   }
 
   drawCounters() {
@@ -159,18 +157,20 @@ class App {
     this.minutesDisplay.html(prettyValues.minutes);
     this.secondsDisplay.html(prettyValues.seconds);
 
-    $("#timerPanel").removeClass("overtime-1");
-    $("#timerPanel").removeClass("overtime-2");
-    $("#timerPanel").removeClass("overtime-3");
-    $("#timerPanel").removeClass("overtime-4");
-    $("#timerPanel").removeClass("negative");
+    let tp = $("#timerPanel");
+
+    tp.removeClass("overtime-1");
+    tp.removeClass("overtime-2");
+    tp.removeClass("overtime-3");
+    tp.removeClass("overtime-4");
+    tp.removeClass("negative");
 
     if (prettyValues.overtimeLevel > 0) {
-      $("#timerPanel").addClass(`overtime-${prettyValues.overtimeLevel}`);
+      tp.addClass(`overtime-${prettyValues.overtimeLevel}`);
     }
 
     if (prettyValues.overtimeLevel > 1) {
-      $("#timerPanel").addClass("negative");
+      tp.addClass("negative");
     }
   }
 
@@ -209,6 +209,7 @@ class App {
       this.startedDisplay.html("—");
       this.finishesDisplay.html("—");
       this.pausedDisplay.html("—");
+
     } else {
       const started = this.timer.dtStarted;
       const finishes = this.timer.finishes();
@@ -360,9 +361,8 @@ class Options {
 
   checkDisableStartAndClear() {
     const flag =
-      0 === this.nHours.value() + this.nMinutes.value() + this.nSeconds.value();
+      0 === (this.nHours.value() + this.nMinutes.value() + this.nSeconds.value());
     app.disableStart(flag);
-    app.disableClear(flag);
   }
 }
 
@@ -382,7 +382,11 @@ class Timer {
   /** @type int */ secondsPreviouslyPaused;
 
   constructor() {
-    this.interval = null;
+    this.initialize();
+  }
+
+  initialize() {
+    this.stopInterval();
 
     this.maxHours = 0;
     this.maxMinutes = 0;
@@ -397,28 +401,19 @@ class Timer {
     this.secondsPreviouslyPaused = 0;
   }
 
-  initialize() {
-    this.reset();
+  reset() {
+    this.initialize();
+    this.readOptions();
   }
 
-  reset() {
-    this.stopInterval();
-
+  readOptions() {
     this.maxHours = app.options.nHours.value();
     this.maxMinutes = app.options.nMinutes.value();
     this.maxSeconds = app.options.nSeconds.value();
-
-    this.started = false;
-    this.paused = true;
-    this.ended = false;
-
-    this.dtStarted = null;
-    this.dtPaused = null;
-    this.secondsPreviouslyPaused = 0;
   }
 
   secondsLimit() {
-    return this.maxHours * 3600 + this.maxMinutes * 60 + this.maxSeconds;
+    return (this.maxHours * 3600) + (this.maxMinutes * 60) + this.maxSeconds;
   }
 
   secondsCurrentlyPaused() {
@@ -448,7 +443,7 @@ class Timer {
 
   secondsLeft() {
     const timeLeft = this.timeLeft();
-    return timeLeft.hours * 3600 + timeLeft.minutes * 60 + timeLeft.seconds;
+    return (timeLeft.hours * 3600) + (timeLeft.minutes * 60) + (timeLeft.seconds);
   }
 
   click() {
@@ -456,9 +451,9 @@ class Timer {
 
     if (Math.round(secondsLeft) === 0) {
       this.end();
-
-      app.drawTimer();
     }
+
+    app.drawTimer();
   }
 
   start() {
@@ -500,11 +495,12 @@ class Timer {
   startInterval() {
     this.interval = setInterval(() => {
       this.click();
-    }, 250);
+    }, 50);
   }
 
   stopInterval() {
     clearInterval(this.interval);
+    this.interval = null;
   }
 
   prettyValues() {
