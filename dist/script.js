@@ -158,29 +158,29 @@ class App {
     this.secondsDisplay.html(prettyValues.seconds);
 
     let tp = $("#timerPanel");
+    let ns = $('#negativeSign');
 
     tp.removeClass("overtime-1");
     tp.removeClass("overtime-2");
     tp.removeClass("overtime-3");
     tp.removeClass("overtime-4");
-    tp.removeClass("negative");
+    ns.addClass("hidden");
 
     if (prettyValues.overtimeLevel > 0) {
       tp.addClass(`overtime-${prettyValues.overtimeLevel}`);
     }
 
     if (prettyValues.overtimeLevel > 1) {
-      tp.addClass("negative");
+      ns.removeClass("hidden");
     }
   }
 
   drawButtons() {
     this.btnStart
-      .find(".buttonEmoji")
       .html(
         this.timer.paused ? FontAwesome.fa("play") : FontAwesome.fa("pause")
       );
-    this.btnReset.find(".buttonEmoji").html(FontAwesome.fa("trash"));
+    this.btnReset.html(FontAwesome.fa("trash"));
     if (this.timer.paused) {
       this.btnStart.prop("title", "Start timer (hotkey space)");
     } else {
