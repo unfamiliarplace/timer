@@ -45,10 +45,10 @@ class App {
   };
   
   preloadJukebox() {
-    this.jukebox.addByURL('cathedral', 'https://tools.unfamiliarplace.com/common/assets/sounds/cathedral.mp3');
-    this.jukebox.addByURL('pipe', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pipe.mp3');
-    this.jukebox.addByURL('pause', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_pause.mp3');
-    this.jukebox.addByURL('kick', 'https://tools.unfamiliarplace.com/common/assets/sounds/smb_kick.mp3');
+    this.jukebox.addByURL('cathedral', 'https://t.sawczak.com/common/assets/sounds/cathedral.mp3');
+    this.jukebox.addByURL('pipe', 'https://t.sawczak.com/common/assets/sounds/smb_pipe.mp3');
+    this.jukebox.addByURL('pause', 'https://t.sawczak.com/common/assets/sounds/smb_pause.mp3');
+    this.jukebox.addByURL('kick', 'https://t.sawczak.com/common/assets/sounds/smb_kick.mp3');
   }
 
   gatherElements() {
