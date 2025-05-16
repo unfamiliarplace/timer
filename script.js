@@ -17,8 +17,12 @@ class App {
     this.gatherElements();
     this.bindElements();
 
-    this.stage = new _Stage();
-    this.addScenes();
+    this.stage = new Stage();
+    this.stage.createScenes([
+      {name: 'timer', panelSelector: '#timerScene'},
+      {name: 'alarm', panelSelector: '#alarmScene'},
+    ]);
+    this.stage.setDefault("timer");
     this.stage.show('timer');
 
     this.jukebox = new Jukebox();
@@ -37,12 +41,6 @@ class App {
     this.overtime = false;
     this.ringInterval = null;
   }
-
-  addScenes = () => {
-    this.stage.addScene(new _Scene("timer", "#timerScene"));
-    this.stage.addScene(new _Scene("alarm", "#alarmScene"));
-    this.stage.setDefault("timer");
-  };
   
   preloadJukebox() {
     this.jukebox.addByURL('cathedral', 'https://t.sawczak.com/common/assets/sounds/cathedral.mp3');
@@ -306,7 +304,7 @@ class App {
   }
 
   rotateHourglass(degrees) {
-    Tools.rotate(this.hourglass, degrees);
+    DOMTools.rotate(this.hourglass, degrees);
   }
 
   resetHourglass() {

@@ -1,14 +1,17 @@
 body {
-    background: #0c1d26;
+    --bg-color: #0c1d26;
+    --text-color: #fff;
+    background: var(--bg-color);
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
 #app {
-    color: #fff;
+    background: var(--bg-color);
+    color: var(--text-color);
     width: 800px;
-    height: 95vh;
+    height: 100vh;
     font-family: 'Helvetica', 'Arial', sans-serif;
     text-align: center;
 }
@@ -20,8 +23,6 @@ body {
     flex-direction: row;
     justify-content: center;
     font-size: 33em;
-    /*z-index: 99;*/
-    /*position: absolute;*/
     box-sizing: border-box;
 }
 
@@ -32,7 +33,7 @@ body {
 #settingsPanel {
     background: url('https://t.sawczak.com/common/assets/images/rumpled-paper.jpg');
     color: #111;
-    height: 130px;
+    /*height: 130px;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -216,9 +217,4 @@ button {
     top: 250px;
     left: 0;
     z-index: 99;
-}
-
-.hide {
-    visibility: hidden;
-    display: none;
 }
