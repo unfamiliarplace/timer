@@ -1,3 +1,7 @@
+const defaultNHours = 0;
+const defaultNMinutes = 28;
+const defaultNSeconds = 0;
+
 class App {
   stage;
   jukebox;
@@ -348,9 +352,9 @@ class Options {
   }
 
   setElements() {
-    this.nHours.value(0);
-    this.nMinutes.value(25);
-    this.nSeconds.value(0);
+    this.nHours.value(defaultNHours);
+    this.nMinutes.value(defaultNMinutes);
+    this.nSeconds.value(defaultNSeconds);
 
     for (let changer of this.changers) {
       changer.min(0);
